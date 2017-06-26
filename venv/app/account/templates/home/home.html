@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container" style="margin-top:20px;">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            HOME
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-show="main.loading">
+                            <div class="spinner">
+                                <div class="bounce1"></div>
+                                <div class="bounce2"></div>
+                                <div class="bounce3"></div>
+                            </div>
+                        </div>
+                        <table class="table table-info" ng-show="!main.loading">
+                            <tr>
+                                <td>Name </td>
+                                <td class="info">{$ main.user.first_name + ' ' + main.user.last_name $}</td>
+                            </tr>
+                            <tr>    
+                                <td>Email Address </td>
+                                <td class="info">{$ main.user.email $}</td>
+                            </tr>
+                            <tr>
+                                <td>User Type </td>
+                                <td class="info">{$ main.user.is_business ? 'Business':'Customer' $}</td>
+                            </tr>
+                            <tr>
+                                <td>Address </td>
+                                <td class="info">{$ main.user.address $}</td>
+                            </tr>
+                        </table>
+                        <a href="/o/applications/" role="button" class="btn btn-default btn-block" ng-disabled="main.loading">
+                            API Applications
+                        </a>
+                        <a href="/edit_profile/" role="button" class="btn btn-default btn-block" style="margin: 5px 0px 5px;" ng-disabled="main.loading">
+                            Edit Profile
+                        </a>
+                        <button class="btn btn-warning btn-block" ng-click="main.logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <div class="panel panel-info">
+                      <div class="panel-heading">
+                            <h3 class="panel-title">Business Account Information</h3>
+                      </div>
+                      <div class="panel-body">
+                        <center>
+                            <div ng-show="main.loading">
+                                <div class="spinner">
+                                    <div class="bounce1"></div>
+                                    <div class="bounce2"></div>
+                                    <div class="bounce3"></div>
+                                </div>
+                            </div>
+                        </center>
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                            <button type="button" class="btn btn-success btn-block" ng-click="main.activateBusinessAccount_popup()" ng-hide="main.user.is_business || main.loading">Activate as Business</button>
+                        </div>
+                        
+                        <table class="table table-bordered" ng-hide="!main.user.is_business || main.loading">
+                            <tr>
+                                <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Name</td>
+                                <td>{$ main.user.account.name $}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Last Update</td>
+                                <td>{$ main.parseDate(main.user.account.update_at).format('ddd, MMMM DD, YYYY hh:mm A') $}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Created</td>
+                                <td>{$ main.parseDate(main.user.account.create_at).format('ddd, MMMM DD, YYYY hh:mm A') $}</td>
+                            </tr>
+                            <tr>
+                                <td class="col-xs-4 col-sm-4 col-md-4 col-lg-4">Status</td>
+                                <td class="success">Active</td>
+                            </tr>
+                        </table>
+                      </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    {% include 'home/popups.html' %}
+
+{% endblock %}

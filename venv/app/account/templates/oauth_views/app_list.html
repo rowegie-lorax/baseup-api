@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+          <div class="block-center">
+            <h3 class="block-center-heading">My Applications</h3>
+            {% if applications %}
+            <table class="table table-bordered">
+                <tr>
+                    <th>App Name</th>
+                    <th>Operations</th>
+                </tr>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.name }}</td>
+                    <td><a href="{{ application.get_absolute_url }}" role="button" class="btn btn-info btn-block">VIEW</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% else %}
+                <p>{% trans "No applications defined" %}. <a href="{% url 'oauth2_provider:register' %}">{% trans "Click here" %}</a> {% trans "if you want to register a new one" %}</p>
+            {% endif %}
+            <a class="btn btn-success" href="{% url "oauth2_provider:register" %}">New Application</a>
+        </div>
+    </div>
+{% endblock content %}

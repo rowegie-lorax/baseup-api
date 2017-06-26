@@ -1,0 +1,20 @@
+{
+  "name": "app",
+  "description": "TEST",
+  "main": "index.js",
+  "authors": [
+    "Edwin J"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "^2.18.1"
+  }
+}

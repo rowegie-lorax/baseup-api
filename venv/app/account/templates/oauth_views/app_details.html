@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% block content %}
+    <div class="row" style="margin-top:10px;">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <b>Application:</b> {{ application.name }}
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label>Client ID</label>
+                        <input type="text" name="" class="form-control" value="{{ application.client_id }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Client Secret</label>
+                        <input type="text" name="" class="form-control" value="{{ application.client_secret }}" readonly>
+                    </div>
+                    <table class="table table-bordered">
+                        <tr>
+                            <th class="info">Client Type</th>
+                            <td>{{ application.client_type }}</td>
+                        </tr>
+                        <tr>
+                            <th class="info">Authorization Grant Type</th>
+                            <td>{{ application.authorization_grant_type }}</td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        <label>Redirect URIs</label>
+                        <textarea class="form-control" readonly>{{ application.redirect_uris }}</textarea>
+                    </div>
+                    <div class="text-center">
+                        <a class="btn" href="{% url "oauth2_provider:list" %}">Go Back</a>
+                        <a class="btn btn-primary" href="{% url "oauth2_provider:update" application.id %}">Edit</a>
+                        <a class="btn btn-danger" href="{% url "oauth2_provider:delete" application.id %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

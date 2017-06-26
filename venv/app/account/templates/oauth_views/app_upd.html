@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load i18n widget_tweaks %}
+{% block content %}
+	<div class="row" style="margin-top:10px;">
+		<div class="col-md-4 col-md-offset-4">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<div class="panel-title">
+						{% block app-form-title %}
+						Update Application
+						{% endblock app-form-title %}
+					</div>
+				</div>
+				<div class="panel-body">
+					<form class="form-horizontal" method="post" action="{% block app-form-action-url %}{% url 'oauth2_provider:update' application.id %}{% endblock app-form-action-url %}">
+						{% csrf_token %}
+
+						{% for field in form %}
+				            {% if field.errors %}
+				                <div class="control-group error">
+				                    <label class="control-label">{{ field.label }}</label> 
+				                    <div class="controls">{{ field }}
+				                        <span class="help-inline">
+				                            {% for error in  field.errors %}{{ error }}{% endfor %}
+				                        </span>
+				                    </div>
+				                </div>
+				            {% else %}
+				                <div class="control-group">
+				                    <label class="control-label">{{ field.label }}</label> 
+				                    <div class="controls">{{ field|attr:"class:form-control" }}
+				                        {% if field.help_text %}
+				                            <p class="help-inline"><small>{{ field.help_text }}</small></p>
+				                        {% endif %}
+				                    </div>
+				                </div>
+				            {% endif %}
+				        {% endfor %}
+
+			            <div class="control-group">
+			                <div class="controls">
+			                    <a class="btn" href="{% block app-form-back-url %}{% url "oauth2_provider:detail" application.id %}{% endblock app-form-back-url %}">
+			                        {% trans "Go Back" %}
+			                    </a>
+			                    <button type="submit" class="btn btn-primary">Save</button>
+			                </div>
+			            </div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

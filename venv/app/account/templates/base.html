@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MainCtrl as main" ng-cloak>
+<head>
+	<title>TEST APP</title>
+	{% load static %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'vendor/node_modules/bootstrap/dist/css/bootstrap.min.css' %}">	
+</head>
+<body>
+	{% block content %}
+	{% endblock content %}
+
+<script src="{% static 'vendor/node_modules/angular/angular.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/angular-resource/angular-resource.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/jquery/dist/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/node_modules/js-cookie/src/js.cookie.js' %}"></script>
+<script src="{% static 'vendor/node_modules/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'vendor/bower_components/moment/moment.js' %}"></script>
+
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+</html>
